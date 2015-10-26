@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Reload Hub";
+}
+<br/>
+<p>A Qlik Sense ASP.NET application using SignalR.</p>
+<br/>
+This example has multiple purposes :<BR/>
+<li>Illustrate how the Qlik Sense .Net SDK can be used on the backend to perform Qlik tasks an how the backend and the client can interact.</li>
+<li>Illustrate how one can decompose a Qlik Sense App so that scripts can be reloaded from an external server.</li>
+
+
+<div class="row" style="margin-bottom: 15px; margin-top: 15px">
+    <div class="col-md-6">
+        <input type=text list="connectionList" data-bind="value: selectedCon" />
+        <datalist id="connectionList" data-bind="foreach: connections">
+            <option data-bind="value: $data"></option>
+        </datalist>
+        <button class="btn btn-primary" data-bind="click:connect">Connect</button>
+    </div>
+    <div class="col-md-6">
+        <select data-bind="options: appIdentifiers, value: selectedApp, optionsCaption: 'Select an app...'"></select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <textarea rows="6" cols="80" data-bind="value:script"> </textarea>
+        <button class="btn btn-primary" data-bind="click:reloadScript">Reload</button>
+    </div>
+    <div class="col-md-6">
+        <div data-bind="foreach:messages">
+            <div data-bind="text: $data"></div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="~/SignalR/hubs"></script>
+    <script src="~/Scripts/knockout-3.3.0.js"></script>
+    <script src="~/Scripts/ReloadScript.js"></script>
+
+}
